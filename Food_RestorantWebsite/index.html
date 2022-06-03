@@ -8,15 +8,17 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css2?family=Fira+Sans+Condensed:wght@500&family=Gothic+A1:wght@500&family=Josefin+Sans&family=Poppins:ital,wght@0,300;0,400;0,500;0,600;0,700;1,800&display=swap" rel="stylesheet">
+   
     <link rel="stylesheet" href="style.css">
     <title>FastFood Website</title>
+
 </head>
 <body>
     <header>
-        <h1 class="logo">Food</h1>
+        <h1 class="logo"><a href="#home">Food</a></h1>
         <div class="fa-solid fa-bars" id="menu_Icon" ></div>
         <ul class="navbar">
-            <li><a href="#home">Home</a></li>
+            <li><a href="#home" class="selected">Home</a></li>
             <li><a href="#about">About</a></li>
             <li><a href="#menu">Menu</a></li>
             <li><a href="#Services">Services</a></li>
@@ -116,7 +118,7 @@
                     reiciendis, quidem ducimus laudantium</p>
             </div>
         </div>
-    </section>
+        </section>
 
     <!-- Service call to action part -->
     <section class="callAction">
@@ -170,5 +172,52 @@
             </div>
         </div>
     </section>
+
+
+
+
+
+<!-- Scripts -->
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+
+<script>
+    $(document).ready(function () {
+        let menuScrollTimer = null;
+        $(".navbar a").click(function (e) {
+            // Prevent default behaviour ( scroll to element )
+            e.preventDefault();
+            if (menuScrollTimer === null) {
+                // Highlight the clicked item
+                $('.navbar a.selected').removeClass('selected');
+                $(this).addClass('selected');
+                // Smooth scroll to the target section
+                let target = $(this).attr('href');
+                $('html, body').animate({ scrollTop: $(target).offset().top - 30 }, 30);
+                // Set `menuScrollTimer` timer
+                // This will prevents multiple clicks on menu items whule the smooth scroll is taking effect
+                // This will also prevent the scroll logic from running
+                menuScrollTimer = setTimeout(function () {
+                    clearTimeout(menuScrollTimer);
+                    menuScrollTimer = null;
+                }, 1050);
+            }
+        });
+
+        $(window).scroll(function (e) {
+            // Avoid triggering the logic if the scroll event is triggerd from clicking one of the items
+            if (menuScrollTimer === null) {
+                let windowTop = $(this).scrollTop();
+
+                $('.navbar a').each(function (event) {
+                    if (windowTop >= $($(this).attr('href')).offset().top - 30) {
+                        $('.navbar .selected').removeClass('selected');
+                        $(this).addClass('selected');
+                    }
+                });
+            }
+        });
+    });
+</script>
+
 </body>
 </html>
