@@ -25,7 +25,7 @@ body{
     background: var(--bg-color);
     /* color: var(--main-color); */
 }
-.logo{
+.logo a{
     color: var(--main-color);
     font-size: var(--h2-font);
 }
@@ -39,6 +39,7 @@ header{
     align-items: center;
     justify-content:space-between;
     background-color: var(--bg-color);
+    z-index: 1000;
 }
 .navbar{
     display: flex; 
@@ -52,6 +53,10 @@ header{
 .navbar a:hover{
     color:var(--main-color);
     transition: 0.5s ease-in-out;
+}
+.navbar a.selected{
+    color:var(--main-color);
+    /* transition: 0.5s ease-in-out; */
 }
 #menu_Icon{
     font-size: 1.2rem;
@@ -187,7 +192,6 @@ section{
     grid-template-columns: repeat(auto-fit, minmax(240px, auto));
     grid-gap: 1.5rem;
     margin-top: 4rem;
-    /* border: 1px solid red; */
 }
 .serviceBox{
     text-align: center;
@@ -208,11 +212,12 @@ section{
 }
 .callAction{
     background: #feeefe;
-    padding: 70px 0;
+    padding: 20px 0;
     width: 60%;
     border-radius: 10px;
     text-align: center;
-    margin: 100px auto;
+    margin: 20px auto; 
+    /* border: 1px solid red; */
 }
 .callAction h2{
     font-size: 2rem;
@@ -224,7 +229,7 @@ section{
     flex-wrap: wrap;
 }
 .footer{
-    padding: 10px 0;
+    padding: 100px 0;
 }
 .colms{
     width: 25%;
